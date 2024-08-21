@@ -108,7 +108,7 @@
     <div id="workout-plan">
       <h2>Workout Plan</h2>
       <ul id="workout-list">
-        </ul>
+      </ul>
     </div>
 
     <div id="weekly-plan" class="weekly-list">
@@ -118,51 +118,46 @@
         <label for="sunday-workout">Sunday:</label>
         <select id="sunday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
 
       <div class="day-container">
         <label for="monday-workout">Monday:</label>
         <select id="monday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
 
       <div class="day-container">
         <label for="tuesday-workout">Tuesday:</label>
         <select id="tuesday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
-
       <div class="day-container">
         <label for="wednesday-workout">Wednesday:</label>
         <select id="wednesday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
-
       <div class="day-container">
         <label for="thursday-workout">Thursday:</label>
         <select id="thursday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
-
       <div class="day-container">
         <label for="friday-workout">Friday:</label>
         <select id="friday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
-
       <div class="day-container">
         <label for="saturday-workout">Saturday:</label>
         <select id="saturday-workout">
           <option value="">Rest</option>
-          </select>
+        </select>
       </div>
-    </div>
   </div>
 
   <script>
@@ -183,6 +178,7 @@
       workouts.push({ name: workoutName, duration: workoutDuration });
       localStorage.setItem('workouts', JSON.stringify(workouts));
       renderWorkoutList();
+      updateWeeklyPlanOptions(); // Add the new workout to weekly plan select options
     }
     // Function to render the workout list in the HTML
     function renderWorkoutList() {
@@ -198,14 +194,13 @@
           console.log('Edit button clicked for workout:', workout);
           const newName = prompt('Enter new workout name:', workout.name);
           const newDuration = parseInt(prompt('Enter new duration (minutes):', workout.duration));
-
           if (newName !== null && newDuration !== null) {
             workouts[index] = { name: newName, duration: newDuration };
             localStorage.setItem('workouts', JSON.stringify(workouts));
             renderWorkoutList();
+            updateWeeklyPlanOptions(); // Update weekly plan options after editing
           }
         });
-
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.classList.add('delete-button');
@@ -213,6 +208,7 @@
           workouts.splice(index, 1); // Remove workout from array
           localStorage.setItem('workouts', JSON.stringify(workouts));
           renderWorkoutList(); // Re-render the list
+          updateWeeklyPlanOptions(); // Update weekly plan options after deleting
         });
         const editButtons = document.createElement('div');
         editButtons.classList.add('edit-buttons');
@@ -220,6 +216,21 @@
         editButtons.appendChild(deleteButton);
         listItem.appendChild(editButtons);
         workoutList.appendChild(listItem);
+      });
+    }
+    // Function to update the weekly plan select options
+    function updateWeeklyPlanOptions() {
+      // Update select options for each day
+      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      days.forEach(day => {
+        const selectElement = document.getElementById(`${day}-workout`);
+        selectElement.innerHTML = '<option value="">Rest</option>'; // Reset options
+        workouts.forEach(workout => {
+          const option = document.createElement('option');
+          option.value = workout.name;
+          option.text = workout.name;
+          selectElement.add(option);
+        });
       });
     }
     // Event listener for adding workouts
@@ -232,6 +243,7 @@
     });
     // Render the initial workout list
     renderWorkoutList();
+    updateWeeklyPlanOptions(); // Initialize the weekly plan options
   </script>
 </body>
 </html>
