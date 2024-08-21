@@ -80,6 +80,27 @@
       background-color: #f44336;
       color: #fff;
     }
+
+    .weekly-list {
+      margin-top: 20px;
+    }
+
+    .weekly-list h3 {
+      margin-bottom: 10px;
+    }
+
+    .day-container {
+      margin-bottom: 10px;
+    }
+
+    .day-container label {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .day-container select {
+      width: 150px;
+    }
   </style>
 </head>
 <body>
@@ -104,11 +125,71 @@
       <ul id="workout-list">
         </ul>
     </div>
+
+    <div id="weekly-plan" class="weekly-list">
+      <h2>Weekly Workout Plan</h2>
+
+      <div class="day-container">
+        <label for="sunday-workout">Sunday:</label>
+        <select id="sunday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+
+      <div class="day-container">
+        <label for="monday-workout">Monday:</label>
+        <select id="monday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+
+      <div class="day-container">
+        <label for="tuesday-workout">Tuesday:</label>
+        <select id="tuesday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+
+      <div class="day-container">
+        <label for="wednesday-workout">Wednesday:</label>
+        <select id="wednesday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+
+      <div class="day-container">
+        <label for="thursday-workout">Thursday:</label>
+        <select id="thursday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+
+      <div class="day-container">
+        <label for="friday-workout">Friday:</label>
+        <select id="friday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+
+      <div class="day-container">
+        <label for="saturday-workout">Saturday:</label>
+        <select id="saturday-workout">
+          <option value="">Rest</option>
+          </select>
+      </div>
+    </div>
   </div>
 
   <script>
     const workoutForm = document.getElementById('workout-form');
     const workoutList = document.getElementById('workout-list');
+    const sundayWorkoutSelect = document.getElementById('sunday-workout');
+    const mondayWorkoutSelect = document.getElementById('monday-workout');
+    const tuesdayWorkoutSelect = document.getElementById('tuesday-workout');
+    const wednesdayWorkoutSelect = document.getElementById('wednesday-workout');
+    const thursdayWorkoutSelect = document.getElementById('thursday-workout');
+    const fridayWorkoutSelect = document.getElementById('friday-workout');
+    const saturdayWorkoutSelect = document.getElementById('saturday-workout');
 
     // Load workouts from local storage (if any)
     let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
@@ -133,7 +214,14 @@
         editButton.textContent = 'Edit';
         editButton.addEventListener('click', () => {
           // Implement edit functionality here (for future sessions)
-          console.log('Edit button clicked for workout:', workout);
+          const newName = prompt('Enter new workout name:', workout.name);
+          const newDuration = parseInt(prompt('Enter new duration (minutes):', workout.duration));
+
+          if (newName !== null && newDuration !== null) {
+            workouts[index] = { name: newName, duration: newDuration };
+            localStorage.setItem('workouts', JSON.stringify(workouts));
+            renderWorkoutList();
+          }
         });
 
         const deleteButton = document.createElement('button');
