@@ -1,261 +1,318 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>ZWorkout</title>
-  <style>
-    /* Basic Styling */
-    body {
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f4f4f4;
-    }
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>ZWorkout</title>
+      <style>
+        /* Basic Styling */
+        body {
+          font-family: sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          background-color: #f4f4f4;
+        }
 
-    #zworkout-container {
-      width: 600px;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        #zworkout-container {
+          width: 600px;
+          padding: 20px;
+          border-radius: 10px;
+          background-color: #fff;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    h1, h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        h1, h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
 
-    form {
-      margin-bottom: 20px;
-    }
+        form {
+          margin-bottom: 20px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
 
-    input,
-    button {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      width: 100%;
-    }
+        input,
+        button {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          width: 100%;
+        }
 
-    button {
-      background-color: #007bff;
-      color: #fff;
-      cursor: pointer;
-    }
+        button {
+          background-color: #007bff;
+          color: #fff;
+          cursor: pointer;
+        }
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+        ul {
+          list-style: none;
+          padding: 0;
+        }
 
-    li {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      background-color: #f9f9f9;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        li {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-bottom: 5px;
+          background-color: #f9f9f9;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
 
-    .edit-buttons {
-      display: flex;
-    }
+        .edit-buttons {
+          display: flex;
+        }
 
-    .edit-buttons button {
-      background-color: #4CAF50;
-      color: #fff;
-      margin-right: 5px;
-    }
+        .edit-buttons button {
+          background-color: #4CAF50;
+          color: #fff;
+          margin-right: 5px;
+        }
 
-    .delete-button {
-      background-color: #f44336;
-      color: #fff;
-    }
+        .delete-button {
+          background-color: #f44336;
+          color: #fff;
+        }
 
-    .weekly-list {
-      margin-top: 20px;
-    }
+        .weekly-list {
+          margin-top: 20px;
+        }
 
-    .weekly-list h3 {
-      margin-bottom: 10px;
-    }
+        .weekly-list h3 {
+          margin-bottom: 10px;
+        }
 
-    .day-container {
-      margin-bottom: 10px;
-    }
+        .day-container {
+          margin-bottom: 10px;
+        }
 
-    .day-container label {
-      display: inline-block;
-      margin-right: 10px;
-    }
+        .day-container label {
+          display: inline-block;
+          margin-right: 10px;
+        }
 
-    .day-container select {
-      width: 150px;
-    }
-  </style>
-</head>
-<body>
-  <div id="zworkout-container">
-    <h1>ZWorkout</h1>
+        .day-container select {
+          width: 150px;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="zworkout-container">
+        <h1>ZWorkout</h1>
 
-    <div id="add-workout">
-      <h2>Add Workout</h2>
-      <form id="workout-form">
-        <label for="workout-name">Workout Name:</label>
-        <input type="text" id="workout-name" name="workout-name">
+        <div id="add-workout">
+          <h2>Add Workout</h2>
+          <form id="workout-form">
+            <label for="workout-name">Workout Name:</label>
+            <input type="text" id="workout-name" name="workout-name">
 
-        <label for="workout-duration">Duration (minutes):</label>
-        <input type="number" id="workout-duration" name="workout-duration">
+            <label for="workout-duration">Duration (minutes):</label>
+            <input type="number" id="workout-duration" name="workout-duration">
 
-        <button type="submit">Add Workout</button>
-      </form>
-    </div>
+            <button type="submit">Add Workout</button>
+          </form>
+        </div>
 
-    <div id="workout-plan">
-      <h2>Workout Plan</h2>
-      <ul id="workout-list">
-        </ul>
-    </div>
+        <div id="workout-plan">
+          <h2>Workout Plan</h2>
+          <ul id="workout-list">
+            </ul>
+        </div>
 
-    <div id="weekly-plan" class="weekly-list">
-      <h2>Weekly Workout Plan</h2>
+        <div id="weekly-plan" class="weekly-list">
+          <h2>Weekly Workout Plan</h2>
 
-      <div class="day-container">
-        <label for="sunday-workout">Sunday:</label>
-        <select id="sunday-workout">
-          <option value="">Rest</option>
-          </select>
+          <div class="day-container">
+            <label for="sunday-workout">Sunday:</label>
+            <select id="sunday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+
+          <div class="day-container">
+            <label for="monday-workout">Monday:</label>
+            <select id="monday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+
+          <div class="day-container">
+            <label for="tuesday-workout">Tuesday:</label>
+            <select id="tuesday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+
+          <div class="day-container">
+            <label for="wednesday-workout">Wednesday:</label>
+            <select id="wednesday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+
+          <div class="day-container">
+            <label for="thursday-workout">Thursday:</label>
+            <select id="thursday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+
+          <div class="day-container">
+            <label for="friday-workout">Friday:</label>
+            <select id="friday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+
+          <div class="day-container">
+            <label for="saturday-workout">Saturday:</label>
+            <select id="saturday-workout">
+              <option value="">Rest</option>
+              </select>
+          </div>
+        </div>
       </div>
 
-      <div class="day-container">
-        <label for="monday-workout">Monday:</label>
-        <select id="monday-workout">
-          <option value="">Rest</option>
-          </select>
-      </div>
+      <script>
+        const workoutForm = document.getElementById('workout-form');
+        const workoutList = document.getElementById('workout-list');
+        const sundayWorkoutSelect = document.getElementById('sunday-workout');
+        const mondayWorkoutSelect = document.getElementById('monday-workout');
+        const tuesdayWorkoutSelect = document.getElementById('tuesday-workout');
+        const wednesdayWorkoutSelect = document.getElementById('wednesday-workout');
+        const thursdayWorkoutSelect = document.getElementById('thursday-workout');
+        const fridayWorkoutSelect = document.getElementById('friday-workout');
+        const saturdayWorkoutSelect = document.getElementById('saturday-workout');
 
-      <div class="day-container">
-        <label for="tuesday-workout">Tuesday:</label>
-        <select id="tuesday-workout">
-          <option value="">Rest</option>
-          </select>
-      </div>
+        // Load workouts from local storage (if any)
+        let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+        let weeklyPlan = JSON.parse(localStorage.getItem('weeklyPlan')) || {
+          sunday: '',
+          monday: '',
+          tuesday: '',
+          wednesday: '',
+          thursday: '',
+          friday: '',
+          saturday: ''
+        };
 
-      <div class="day-container">
-        <label for="wednesday-workout">Wednesday:</label>
-        <select id="wednesday-workout">
-          <option value="">Rest</option>
-          </select>
-      </div>
-
-      <div class="day-container">
-        <label for="thursday-workout">Thursday:</label>
-        <select id="thursday-workout">
-          <option value="">Rest</option>
-          </select>
-      </div>
-
-      <div class="day-container">
-        <label for="friday-workout">Friday:</label>
-        <select id="friday-workout">
-          <option value="">Rest</option>
-          </select>
-      </div>
-
-      <div class="day-container">
-        <label for="saturday-workout">Saturday:</label>
-        <select id="saturday-workout">
-          <option value="">Rest</option>
-          </select>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const workoutForm = document.getElementById('workout-form');
-    const workoutList = document.getElementById('workout-list');
-    const sundayWorkoutSelect = document.getElementById('sunday-workout');
-    const mondayWorkoutSelect = document.getElementById('monday-workout');
-    const tuesdayWorkoutSelect = document.getElementById('tuesday-workout');
-    const wednesdayWorkoutSelect = document.getElementById('wednesday-workout');
-    const thursdayWorkoutSelect = document.getElementById('thursday-workout');
-    const fridayWorkoutSelect = document.getElementById('friday-workout');
-    const saturdayWorkoutSelect = document.getElementById('saturday-workout');
-
-    // Load workouts from local storage (if any)
-    let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
-
-    // Function to add a new workout to the list
-    function addWorkout(workoutName, workoutDuration) {
-      workouts.push({ name: workoutName, duration: workoutDuration });
-      localStorage.setItem('workouts', JSON.stringify(workouts));
-      renderWorkoutList();
-    }
-
-    // Function to render the workout list in the HTML
-    function renderWorkoutList() {
-      workoutList.innerHTML = ''; // Clear the list
-
-      workouts.forEach((workout, index) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${workout.name} (${workout.duration} minutes)`;
-
-        // Create edit and delete buttons
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.addEventListener('click', () => {
-          // Implement edit functionality here (for future sessions)
-          const newName = prompt('Enter new workout name:', workout.name);
-          const newDuration = parseInt(prompt('Enter new duration (minutes):', workout.duration));
-
-          if (newName !== null && newDuration !== null) {
-            workouts[index] = { name: newName, duration: newDuration };
-            localStorage.setItem('workouts', JSON.stringify(workouts));
-            renderWorkoutList();
-          }
-        });
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.classList.add('delete-button');
-        deleteButton.addEventListener('click', () => {
-          workouts.splice(index, 1); // Remove workout from array
+        // Function to add a new workout to the list
+        function addWorkout(workoutName, workoutDuration) {
+          workouts.push({ name: workoutName, duration: workoutDuration });
           localStorage.setItem('workouts', JSON.stringify(workouts));
-          renderWorkoutList(); // Re-render the list
+          updateWorkoutSelects();
+          renderWorkoutList();
+        }
+
+        // Function to render the workout list in the HTML
+        function renderWorkoutList() {
+          workoutList.innerHTML = ''; // Clear the list
+
+          workouts.forEach((workout, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${workout.name} (${workout.duration} minutes)`;
+
+            // Create edit and delete buttons
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+              // Implement edit functionality here (for future sessions)
+              const newName = prompt('Enter new workout name:', workout.name);
+              const newDuration = parseInt(prompt('Enter new duration (minutes):', workout.duration));
+
+              if (newName !== null && newDuration !== null) {
+                workouts[index] = { name: newName, duration: newDuration };
+                localStorage.setItem('workouts', JSON.stringify(workouts));
+                updateWorkoutSelects();
+                renderWorkoutList();
+              }
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-button');
+            deleteButton.addEventListener('click', () => {
+              workouts.splice(index, 1); // Remove workout from array
+              localStorage.setItem('workouts', JSON.stringify(workouts));
+              updateWorkoutSelects();
+              renderWorkoutList(); // Re-render the list
+            });
+
+            const editButtons = document.createElement('div');
+            editButtons.classList.add('edit-buttons');
+            editButtons.appendChild(editButton);
+            editButtons.appendChild(deleteButton);
+
+            listItem.appendChild(editButtons);
+            workoutList.appendChild(listItem);
+          });
+        }
+
+        // Event listener for adding workouts
+        workoutForm.addEventListener('submit', (event) => {
+          event.preventDefault(); // Prevent form from submitting normally
+
+          const workoutName = document.getElementById('workout-name').value;
+          const workoutDuration = parseInt(document.getElementById('workout-duration').value);
+
+          addWorkout(workoutName, workoutDuration);
+          workoutForm.reset(); // Clear the form fields
         });
 
-        const editButtons = document.createElement('div');
-        editButtons.classList.add('edit-buttons');
-        editButtons.appendChild(editButton);
-        editButtons.appendChild(deleteButton);
+        // Function to update workout options in select elements
+        function updateWorkoutSelects() {
+          // Update options for all day select elements
+          [sundayWorkoutSelect, mondayWorkoutSelect, tuesdayWorkoutSelect, wednesdayWorkoutSelect, thursdayWorkoutSelect, fridayWorkoutSelect, saturdayWorkoutSelect].forEach(select => {
+            select.innerHTML = '';
+            select.add(new Option('Rest', ''));
+            workouts.forEach((workout) => {
+              select.add(new Option(workout.name, workout.name));
+            });
+            // Select the previously chosen workout for the day (if any)
+            select.value = weeklyPlan[select.id.replace('-workout', '')];
+          });
+        }
 
-        listItem.appendChild(editButtons);
-        workoutList.appendChild(listItem);
-      });
-    }
+        // Event listeners for day select elements (for future sessions: save the weekly plan)
+        sundayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.sunday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
+        mondayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.monday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
+        tuesdayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.tuesday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
+        wednesdayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.wednesday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
+        thursdayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.thursday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
+        fridayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.friday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
+        saturdayWorkoutSelect.addEventListener('change', (event) => {
+          weeklyPlan.saturday = event.target.value;
+          localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
+        });
 
-    // Event listener for adding workouts
-    workoutForm.addEventListener('submit', (event) => {
-      event.preventDefault(); // Prevent form from submitting normally
-
-      const workoutName = document.getElementById('workout-name').value;
-      const workoutDuration = parseInt(document.getElementById('workout-duration').value);
-
-      addWorkout(workoutName, workoutDuration);
-      workoutForm.reset(); // Clear the form fields
-    });
-
-    // Render the initial workout list
-    renderWorkoutList();
-  </script>
-</body>
-</html>
+        // Render the initial workout list and update workout selects
+        renderWorkoutList();
+        updateWorkoutSelects();
+      </script>
+    </body>
+    </html>
