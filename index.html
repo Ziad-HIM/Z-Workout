@@ -107,7 +107,67 @@
   </div>
 
   <script>
-    // JavaScript will go here
+    const workoutForm = document.getElementById('workout-form');
+    const workoutList = document.getElementById('workout-list');
+
+    // Load workouts from local storage (if any)
+    let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+
+    // Function to add a new workout to the list
+    function addWorkout(workoutName, workoutDuration) {
+      workouts.push({ name: workoutName, duration: workoutDuration });
+      localStorage.setItem('workouts', JSON.stringify(workouts));
+      renderWorkoutList();
+    }
+
+    // Function to render the workout list in the HTML
+    function renderWorkoutList() {
+      workoutList.innerHTML = ''; // Clear the list
+
+      workouts.forEach((workout, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${workout.name} (${workout.duration} minutes)`;
+
+        // Create edit and delete buttons
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', () => {
+          // Implement edit functionality here (for future sessions)
+          console.log('Edit button clicked for workout:', workout);
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', () => {
+          workouts.splice(index, 1); // Remove workout from array
+          localStorage.setItem('workouts', JSON.stringify(workouts));
+          renderWorkoutList(); // Re-render the list
+        });
+
+        const editButtons = document.createElement('div');
+        editButtons.classList.add('edit-buttons');
+        editButtons.appendChild(editButton);
+        editButtons.appendChild(deleteButton);
+
+        listItem.appendChild(editButtons);
+        workoutList.appendChild(listItem);
+      });
+    }
+
+    // Event listener for adding workouts
+    workoutForm.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent form from submitting normally
+
+      const workoutName = document.getElementById('workout-name').value;
+      const workoutDuration = parseInt(document.getElementById('workout-duration').value);
+
+      addWorkout(workoutName, workoutDuration);
+      workoutForm.reset(); // Clear the form fields
+    });
+
+    // Render the initial workout list
+    renderWorkoutList();
   </script>
 </body>
 </html>
